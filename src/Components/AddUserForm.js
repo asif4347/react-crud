@@ -3,7 +3,8 @@ import React, {useState} from 'react'
 const AddUserForm = props => {
 
     const initialFormState = {id: null, name: '', username: ''}
-    const [user, setUser] = useState(initialFormState)
+    const [user, setUser] = useState(initialFormState);
+
     const handleInputChange = event => {
         console.log(event)
         const {name, value} = event.target
@@ -17,6 +18,7 @@ const AddUserForm = props => {
         setUser(initialFormState)
 
     }
+
     console.log(user)
     return (
         <form onSubmit={handleSubmit}>

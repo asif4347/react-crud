@@ -15,6 +15,9 @@ const App = () => {
         user.id = users.length + 1;
         setUsers([...users, user]);
     }
+    const deleteUser = id => {
+        setUsers(users.filter(user => user.id !== id))
+    }
     console.log(users)
     return (
         <div className="container">
@@ -30,6 +33,7 @@ const App = () => {
                     <h2>View users</h2>
                     <UserTable
                         users={users}
+                        deleteUser={deleteUser}
                     />
                 </div>
             </div>

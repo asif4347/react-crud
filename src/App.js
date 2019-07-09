@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 // import './Components/UserTable'
 import UserTable from "./Components/UserTable";
@@ -8,14 +8,25 @@ import EditUserForm from "./Components/EditUserForm";
 
 const App = () => {
     const usersData = [
-        {id: 1, name: 'Tania', username: 'floppydiskette'},
-        {id: 2, name: 'Craig', username: 'siliconeidolon'},
-        {id: 3, name: 'Ben', username: 'benisphere'},
+        // {id: 1, name: 'Tania', username: 'floppydiskette'},
+        // {id: 2, name: 'Craig', username: 'siliconeidolon'},
+        // {id: 3, name: 'Ben', username: 'benisphere'},
     ]
     const initialFormState = {id: null, name: '', username: ''}
     const [users, setUsers] = useState(usersData);
     const [currentUser, setCurrentUser] = useState(initialFormState);
     const [editing, setEditing] = useState(false);
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/list-users').then(
+            users => {
+                return users.json();
+            }
+        ).then(users => {
+            console.log(users)
+            setUsers(users)
+        })
+    }, [])
+
     const editRow = user => {
         setEditing(true)
         setCurrentUser({id: user.id, name: user.name, username: user.username})
